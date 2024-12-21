@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #f4f4f9, #e8edf3);
+            color: #333;
+        }
+        header {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom: 5px solid #fff;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        nav {
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            color: #555;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background: #4b6cb7;
+            color: #fff;
+        }
+        section {
+            padding: 60px;
+            margin: 20px auto;
+            max-width: 900px;
+            background: #fff;
+            border-radius: 12px;
+        }
+        section h2 {
+            border-bottom: 3px solid #4b6cb7;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            color: #4b6cb7;
+            font-size: 1.8em;
+        }
+        section p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+        }
+        .about-content img {
+            border-radius: 50%;
+            margin-left: 20px;
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+        }
+        .about-links {
+            margin-top: 20px;
+        }
+        .about-links a {
+            margin-right: 15px;
+            text-decoration: none;
+        }
+        .about-links img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.2s ease;
+        }
+        .about-links img:hover {
+            transform: scale(1.2);
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #182848;
+            color: #fff;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+        footer a {
+            color: #4b6cb7;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .research-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            background: #ffffff;
+        }
+        .research-item h3 {
+            margin-top: 0;
+            color: #4b6cb7;
+            font-size: 1.5em;
+        }
+        .research-item p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        .research-item img {
+            display: block;
+            margin: 20px auto 0;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sartaaj Khan</h1>
+</header>
+
+<nav>
+    <a href="#about">About Me</a>
+    <a href="#research">Research Interests</a>
+    <a href="#publications">Publications</a>
+    <a href="#conferences">Conferences</a>
+    <a href="#awards">Awards</a>
+</nav>
+
+<section id="about">
+    <h2>😊 About Me</h2>
+    <div class="about-content">
+        <p>Hi there! I'm currently a PhD student in chemical engineering and applied chemistry at the University of Toronto. My research revolves around the acceleration of material discovery using deep learning and exploring the multimodality of metal-organic frameworks. Feel free to connect with me on LinkedIn or BlueSky if you are ever interested in talking about chemistry, cheminformatics, material science, engineering or just life!</p>
+        <img src="1708741507135.jpg" alt="Your Photo">
+    </div>
+    <div class="about-links">
+        <a href="https://github.com/sartaajkhan" target="_blank"><img src="images/github.png" alt="GitHub"></a>
+        <a href="cv.pdf" target="_blank"><img src="images/cv.png" alt="CV"></a>
+        <a href="https://scholar.google.com/citations?user=4Pk-wOIAAAAJ&hl=en" target="_blank"><img src="images/googlescholar.png" alt="Google Scholar"></a>
+        <a href="https://www.linkedin.com/in/sartaaj-khan-274a14179/" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
+        <a href="https://bsky.app/profile/sartaajkhan.bsky.social" target="_blank"><img src="images/bluesky.png" alt="BlueSky"></a>
+    </div>
+</section>
+
+<section id="research">
+    <h2>🧪 Research Interests</h2>
+    <div class="research-item">
+        <h3>Deep learning in MOFs</h3>
+        <p>There is a huge incentive (especially now!) with exploring deep learning in MOFs. When designing MOFs, there are millions of possible permutations between the set of available metals and organic linkers - which also means that doing experimental synthesis or screening through molecular dynamics would be extremely expensive and time-consuming. Machine (and deep) learning offers a much cheaper and faster way of exploring this space, while not sacrificing much in terms of performance. Not only does deep learning lay the foundation of the acceleration of material discovery in MOFs, but it also lays the foundation of application discovery! At the end of the day, we want to find MOFs with a diverse set of applications - and deep learning gives us a way of finding these.</p>
+        <img src="images/DL.png" alt="DL Diagram">
+        <figcaption style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #555;">In one of my previous works, a deep learning model was able to discover MOFs with a diverse set of applications ranging from storage to carbon capture!</figcaption>
+    </div>
+    <div class="research-item">
+        <h3>Multimodality in material science</h3>
+        <p>In many cases, a single modality is insufficient for creating robust models. This is especially true for metal-organic frameworks (MOFs), where both the chemical composition and structural geometry must be adequately represented to build effective models that can accelerate material discovery. Therefore, it is essential to combine multiple modalities. Examples of modalities in MOFs include atomistic embeddings of the crystal structure, energy grids, textual representations like SMILES or MOFid, spectral data (e.g., PXRD, NMR), chemical descriptors (e.g., revised autocorrelations), and geometric descriptors (e.g., largest included sphere, free sphere, accessible surface area, and volumes). However, multimodality raises important questions, such as determining which modalities are most appropriate for specific scenarios. Ideally, the chosen modalities should be readily available or easy to obtain close to the synthesis stage.</p>
+        <img src="images/1734773850607.png" alt="Multimodality Diagram">
+        <figcaption style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #555;">Here is one of my previous multimodal model works, in which PXRDs (captures geometry) and the SMILES of the precursors (captures the metal and organic chemistry) combined together to predict any geometric, chemical and electronic property of a MOF.</figcaption>
+    </div>
+    <div class="research-item">
+        <h3>Generative design of materials</h3>
+        <p>One of my current interests is to perform generative design of MOFs using available modalities. With generative design, there are many incentives - but the most important ones are that it removes the complexity of constructing computational structures of MOFs and it allows greater amounts of discovery of brand new MOFs. Currently, MOF generative designs exist in the form of diffusion models, variational autoencoders and can even leverage large language models - but I wish to explore and expand on this.</p>
+        <img src="images/gen_design2-modified.png" alt="Generative Diagram">
+        <figcaption style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #555;">An example of structure generation, reconstruction and property predictions through the use of a VAE (done by Ochiai et al.) for molecules!</figcaption>
+    </div>
+</section>
+
+<section id="publications">
+    <h2>🚀 Publications</h2>
+    <p>Will be updating as my PhD carries on...</p>
+    <ul>
+        <li><strong>Khan, ST</strong>, Moosavi, SM Connecting metal-organic framework synthesis to applications with a self-supervised multimodal model, Chemrxiv, 2024, DOI: <a href="https://chemrxiv.org/engage/chemrxiv/article-details/671a9d9783f22e42140f2df6" target="_blank">10.26434/chemrxiv-2024-mq9b4</a>.</li>
+        <li><strong>Khan, ST</strong>, et al. Reflections from the 2024 Large Language Model (LLM) Hackathon for Applications in Materials Science and Chemistry, arXiv, 2024, DOI: <a href="https://arxiv.org/abs/2411.15221" target="_blank">10.48550/arXiv.2411.15221</a>.</li>
+    </ul>
+</section>
+
+<section id="conferences">
+    <h2>🌎 Conferences</h2>
+    <ul>
+        <li><strong>NeurIPS (AI4Mat track)</strong>: Presented poster "XRayPro: A self-supervised multimodal model for MOF application recommendations using PXRD and precursors", Vancouver, British Columbia, 2024. Paper available <a href="https://openreview.net/forum?id=dduB0yFN3w" target="_blank">here!</a></li>
+        <li><strong>CSChE</strong>: Gave a talk on "Unveiling Property Insights and Recommending MOF Applications from X-Ray Diffraction Patterns using Self-Supervised Transformer Models", Toronto, Ontario, 2024.</li>
+        <li><strong>Accelerate Conference</strong>: Presented poster "Using a self-supervised transformer model for property predictions and MOF application recommendations with only x-ray diffraction patterns", Vancouver, British Columbia, 2024.</li>
+    </ul>
+    <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
+        <img src="images/NeurIPS_logo.png" alt="NeurIPS Logo" style="width: auto; height: 80px;">
+        <img src="images/csche-logo.png" alt="CSChE Logo" style="width: 100px; height: auto;">
+        <img src="images/ac.png" alt="Acceleration Consortium Logo" style="width: auto; height: 80px;">
+    </div>
+</section>
+
+<section id="awards">
+    <h2>🏆 Awards</h2>
+    <ul>
+        <li><strong>LLMs in Chemistry and Materials Hackathon (2024)</strong> Awarded 3rd place ($250 prize funded by Radical AI and Anthropic) in the LLM Hackathon for Applications in Materials and Chemistry for the development of PoreVoyant - a chemistry-informed AI agent that can generate new linkers to decrease the band gap in metal-organic frameworks while leveraging MOF literature. This work was featured in a <a href="https://medium.com/@blaiszik/llms-to-accelerate-discovery-in-materials-science-and-chemistry-refections-on-a-hackathon-b8364ca32242" target="_blank">Medium Article</a>. The GitHub repository can be found <a href="https://github.com/mehradans92/PoreVoyant/tree/main" target="_blank">here.</a></li>
+        <li><strong>Bayesian Optimization for Chemistry and Materials Hackathon (2024)</strong> Awarded <a href="https://ac-bo-hackathon.github.io/">2nd place</a> ($500 CAD prize funded by Acceleration Consortium) in the Bayesian Optimization for Chemistry and Materials Hackathon hosted by Acceleration Consortium at the University of Toronto. The project involved the application of Bayesian Optimization to accelerate the discovery of fluids with the highest heat transfer coefficients. The repository can be found <a href="https://github.com/sartaajkhan/BOMS-ProBs">here.</a></li>
+        <li><strong>NSERC USRA (2020)</strong> Award of $6000 CAD issued for completion of 16 weeks of research work for the summer 2020 term and high academic achievements.</li>
+    </ul>
+</section>
+
+<footer>
+    <p>&copy; 2024 Sartaaj Khan <a href="#">Back to top</a></p>
+</footer>
+
+</body>
+</html>
