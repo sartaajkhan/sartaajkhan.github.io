@@ -1,229 +1,806 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sartaaj Khan</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #f4f4f9, #e8edf3);
-            color: #333;
-        }
-        header {
-            background: linear-gradient(90deg, #4b6cb7, #182848);
-            color: #fff;
-            padding: 40px 0;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-bottom: 5px solid #fff;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 3em;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        nav {
-            background: #ffffff;
-            border-bottom: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        nav a {
-            color: #555;
-            text-decoration: none;
-            padding: 15px 20px;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-        nav a:hover {
-            background: #4b6cb7;
-            color: #fff;
-        }
-        section {
-            padding: 60px;
-            margin: 20px auto;
-            max-width: 900px;
-            background: #fff;
-            border-radius: 12px;
-        }
-        section h2 {
-            border-bottom: 3px solid #4b6cb7;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            color: #4b6cb7;
-            font-size: 1.8em;
-        }
-        section p {
-            font-size: 1.1em;
-            margin-bottom: 20px;
-        }
-        .about-content {
-            display: flex;
-            align-items: center;
-        }
-        .about-content img {
-            border-radius: 50%;
-            margin-left: 20px;
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-        }
-        .about-links {
-            margin-top: 20px;
-        }
-        .about-links a {
-            margin-right: 15px;
-            text-decoration: none;
-        }
-        .about-links img {
-            width: 40px;
-            height: 40px;
-            transition: transform 0.2s ease;
-        }
-        .about-links img:hover {
-            transform: scale(1.2);
-        }
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            background: #182848;
-            color: #fff;
-            margin-top: 40px;
-            font-size: 0.9em;
-        }
-        footer a {
-            color: #4b6cb7;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-        .research-item {
-            margin-bottom: 20px;
-            padding: 20px;
-            border: none;
-            border-radius: 12px;
-            background: #ffffff;
-        }
-        .research-item h3 {
-            margin-top: 0;
-            color: #4b6cb7;
-            font-size: 1.5em;
-        }
-        .research-item p {
-            font-size: 1.1em;
-            color: #555;
-        }
-        .research-item img {
-            display: block;
-            margin: 20px auto 0;
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sartaaj Khan — PhD Candidate</title>
+
+  <!-- ===== Design System ===== -->
+  <style>
+    :root{
+      /* Brand palette (soft, academic, high-contrast on white) */
+      --brand: #0B5FFF;
+      --brand-ink: #0f172a;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --surface: #ffffff;  /* pure white canvas */
+      --card: #ffffff;
+      --ring: rgba(11,95,255,.15);
+      --line: rgba(2,6,23,.08);
+      --shadow: 0 10px 30px rgba(2,6,23,.06), 0 2px 6px rgba(2,6,23,.04);
+      --radius-xl: 18px;
+      --radius-lg: 14px;
+      --radius-md: 12px;
+      --radius-sm: 10px;
+
+      /* Type scale */
+      --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+      --fs-xl: clamp(2.2rem, 3vw + 1rem, 3.4rem);
+      --fs-h1: clamp(1.9rem, 2.3vw + 1rem, 2.6rem);
+      --fs-h2: clamp(1.4rem, 1.2vw + 1rem, 1.6rem);
+      --fs-body: 1.06rem;
+      --fs-small: .95rem;
+      --maxw: 1120px;
+
+      /* Media sizing for research cards */
+      --media-ratio: 4/3;
+    }
+
+    html,body{background:var(--surface); color:var(--ink); font-family:var(--font-sans); line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;}
+    *{box-sizing:border-box}
+    a{color:var(--brand); text-decoration:none}
+    a:hover{opacity:.9}
+    img{display:block; max-width:100%; height:auto}
+
+    /* Container */
+    .wrap{max-width:var(--maxw); margin-inline:auto; padding-inline: clamp(16px, 4vw, 28px);}
+
+    /* Header / Nav */
+    header{position:sticky; top:0; z-index:40; backdrop-filter:saturate(180%) blur(8px); background:rgba(255,255,255,.8); border-bottom:1px solid var(--line)}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand .logo{width:40px; height:40px; border-radius:10px; background:var(--card); box-shadow:var(--shadow); display:grid; place-items:center; border:1px solid var(--line)}
+    .logo svg{width:24px; height:24px}
+    .brand h1{font-size:1.1rem; margin:0; font-weight:700; color:var(--brand-ink)}
+    .brand span{display:block; font-size:.92rem; color:var(--muted); margin-top:2px}
+    .nav a.btn{padding:10px 14px; border:1px solid var(--line); border-radius:12px; background:#fff; color:var(--brand-ink); font-weight:600}
+    .nav a.btn.primary{border-color:transparent; background:var(--brand); color:white; box-shadow:0 6px 20px rgba(11,95,255,.22)}
+    .nav-links{display:flex; gap:14px; align-items:center}
+    .nav-links a{color:var(--brand-ink); padding:8px 10px; border-radius:10px}
+    .nav-links a:hover{background:rgba(2,6,23,.04)}
+    .nav-toggle{display:none}
+
+    /* Hero */
+    .hero{padding: clamp(48px, 8vw, 96px) 0 28px}
+    .hero-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap: clamp(24px, 4vw, 48px); align-items:center}
+    .kicker{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#fff; font-size:.9rem; color:var(--muted)}
+    .kicker .dot{width:8px; height:8px; border-radius:50%; background:var(--brand)}
+    .hero h2{font-size:var(--fs-xl); line-height:1.15; margin:14px 0 10px; color:var(--brand-ink)}
+    .hero p{font-size: clamp(1.06rem, .5vw + 1rem, 1.2rem); color:#374151; margin:0 0 18px}
+    .hero .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:6px}
+    .hero .btn-lg{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid var(--line); background:#fff; font-weight:700}
+    .btn-lg.primary{background:var(--brand); color:#fff; border-color:transparent}
+    .btn-lg svg{width:18px; height:18px}
+
+    /* Photo card with perfect white blend */
+    .portrait{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: clamp(14px, 2vw, 18px);
+    }
+    .portrait img{
+      width:100%;
+      border-radius: calc(var(--radius-xl) - 6px);
+      background:#fff;                  /* seamless white */
+      outline: 1px solid rgba(0,0,0,0.02);
+      filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+    }
+
+    /* Sections */
+    section{padding: clamp(42px, 7vw, 80px) 0}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px}
+    .section-head h3{font-size:var(--fs-h1); margin:0; color:var(--brand-ink)}
+    .section-head p{margin:0; color:var(--muted); max-width:700px}
+
+    /* Cards + grids */
+    .grid{display:grid; gap: clamp(16px, 2.2vw, 24px)}
+    .grid.cols-3{grid-template-columns: repeat(12, 1fr)}
+    .grid.cols-3 > *{grid-column: span 4}
+    @media (max-width: 960px){ .hero-grid{grid-template-columns:1fr} .grid.cols-3 > *{grid-column: span 6} }
+    @media (max-width: 640px){ .grid.cols-3 > *{grid-column: 1 / -1} .nav-links{display:none} .nav-toggle{display:inline-flex} }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    /* Uniform media sizing for all cards */
+    .card .media{
+      background:#fff;
+      aspect-ratio: var(--media-ratio);
+      overflow:hidden;
+    }
+    .card .media img{
+      width:100%;
+      height:100%;
+      object-fit: cover;   /* neat crop; switch to 'contain' to avoid cropping */
+      background:#fff;
+    }
+
+    .card .body{padding:18px}
+    .eyebrow{font-size:.82rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
+    .title{font-size:var(--fs-h2); margin:6px 0 8px; color:var(--brand-ink)}
+    .meta{font-size:.95rem; color:var(--muted)}
+    .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+    .tag{padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#fff; font-size:.92rem; color:#374151}
+
+    /* === APA Publications === */
+    /* APA: uniform font size + italic journal */
+    .pub-apa .cite{
+    font-size: 1rem;          /* one size for all text in the citation */
+    line-height: 1.65;
+    text-indent: -22px;
+    padding-left: 22px;
+    }
+    .pub-apa .cite *{
+    font-size: inherit;       /* authors/year/title/journal/etc inherit same size */
+    }
+    .pub-apa .journal{
+    font-style: italic;       /* ensure journal is italic */
+    }
+
+    /* Slight vertical spacing between publications */
+    :root { --pub-gap: 14px; }  /* tweak 10–18px to taste */
+    .pub-apa li + li { margin-top: var(--pub-gap); }
+
+    :root { --pub-gap: 16px; }        /* spacing between items */
+    .pub-apa li{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding:16px 18px 14px 28px;    /* left padding leaves room for hanging indent */
+    box-shadow: var(--shadow);      /* optional: remove if you want just a line */
+    }
+    .pub-apa li + li{ margin-top: var(--pub-gap); }
+
+    /* subtle hover */
+    .pub-apa li:hover{ border-color: rgba(2,6,23,.16); }
+
+
+    /* Hanging indent */
+    .pub-apa .cite {
+      margin: 0;
+      line-height: 1.65;
+      text-indent: -22px;
+      padding-left: 22px;
+      color: var(--brand-ink);
+      font-size: 1.02rem;
+    }
+    /* APA bits */
+    .pub-apa .authors { font-weight: 600; }
+    .pub-apa .year    { color: var(--muted); }
+    .pub-apa .title   { font-weight: 700; }
+    .pub-apa .journal { font-style: italic; }
+    .pub-apa .volume  { font-style: italic; }
+    .pub-apa .issue   { color: var(--muted); }
+    .pub-apa .pages   { color: var(--muted); }
+    .pub-apa .doi a   { color: var(--brand); }
+
+    .pub-apa .actions{
+      margin-top: 10px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .chip{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background:#fff;
+      font-size:.92rem;
+      color:#374151;
+      text-decoration:none;
+      cursor: pointer;
+    }
+
+    /* Make only *your* name bold; keep others normal */
+    .pub-apa .cite .authors{ font-weight: 400; }
+    .pub-apa .cite .me{ font-weight: 700; }          /* your name */
+    .pub-apa .note{ margin-top:6px; color:var(--muted); font-size:.95rem; }
+    .pub-apa .note .mark{ font-weight:700; margin-right:4px; }
+
+
+    /* Footer */
+    footer{border-top:1px solid var(--line); padding:28px 0 44px; color:var(--muted)}
+    .foot-grid{display:grid; gap:12px; grid-template-columns: 1fr auto}
+    .social{display:flex; gap:12px; flex-wrap:wrap}
+    .social a{padding:8px 10px; border:1px solid var(--line); border-radius:10px; color:var(--ink); background:#fff}
+
+    /* Focus states */
+    :where(a,button,[role="button"],.btn,.btn-lg,.chip):focus-visible{
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+      border-radius:12px;
+      transition:outline .2s ease;
+    }
+
+    ol.pub-apa{
+    list-style: none;   /* no markers */
+    padding-left: 0;
+    margin-left: 0;
+    }
+    ol.pub-apa > li::marker{
+    content: "";        /* belt-and-suspenders for Safari/Edge */
+    }
+
+    /* Utilities */
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+    .mono{font-family:var(--font-mono); font-size:.95rem; color:#111827; background:#f8fafc; padding:2px 6px; border-radius:6px; border:1px solid var(--line)}
+
+    /* ===== Awards ===== */
+    .awards { 
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+    display: grid; 
+    gap: 16px; 
+    }
+    .award {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 16px 18px;
+    }
+    .award .title {
+    margin: 0 0 6px;
+    font-size: var(--fs-h2);
+    color: var(--brand-ink);
+    }
+    .award .desc {
+    margin: 4px 0 12px;
+    color: #374151;
+    }
+    .award .meta {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px;
+    }
+
+    /* ===== Teaching ===== */
+    .teaching{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap:16px;
+    }
+    .teach-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);
+    padding:16px 18px;
+    }
+    .teach-card .title{
+    margin:0 0 6px;
+    font-size:var(--fs-h2);
+    color:var(--brand-ink);
+    }
+    .teach-card .desc{
+    margin:4px 0 12px;
+    color:#374151;
+    }
+    .teach-card .meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    }
+    /* reuse .pill from awards for the info chips */
+
+
+    /* “fill-me-in” pills */
+    .pill {
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px dashed var(--line);
+    background: #fff;
+    font-size: .92rem;
+    color: #374151;
+    }
+    .pill strong { margin-right: 6px; }
+
+    /* optional: subtle hover polish */
+    .award:hover { border-color: rgba(2,6,23,.16); }
+
+    /* Icon bar for hero */
+    .iconbar{
+    display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; align-items:center;
+    }
+    .icon-btn{
+    position:relative;
+    width:64px; height:64px;
+    display:grid; place-items:center;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    color:var(--brand-ink);
+    transition: transform .12s ease, border-color .12s ease;
+    }
+    .icon-btn:hover{ transform:translateY(-1px); border-color:rgba(2,6,23,.16); }
+    .icon-btn svg{ width:24px; height:24px; stroke:currentColor; fill:none; stroke-width:1.75; }
+
+    /* brand tints */
+    .icon-btn.scholar{ color:#4285F4; }
+    .icon-btn.orcid{ color:#A6CE39; }
+    .icon-btn.linkedin{ color:#0A66C2; }
+    .icon-btn.bluesky{ color:#0285FF; }
+    /* PDF badge */
+    .icon-btn .badge{
+    position:absolute; right:-6px; bottom:-6px;
+    padding:2px 6px; border-radius:6px; border:1px solid var(--line);
+    background:#fff; font-size:.72rem; line-height:1; font-family:var(--font-mono);
+    }
+
+    /* use PNGs inside the same icon buttons */
+    .icon-btn img{
+    width:48px; height:48px;          /* consistent sizing */
+    object-fit:contain; display:block;
+    image-rendering:auto;
+    }
+
+
+
+  </style>
 </head>
+
 <body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div>
+          <h1>Sartaaj Khan</h1>
+          <span>Chemical Engineering &amp; Applied Chemistry · University of Toronto</span>
+        </div>
+      </div>
 
-<header>
-    <h1>Sartaaj Khan</h1>
-</header>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#awards">Awards</a>
+        <a href="#projects">Software</a>
+        <a href="#teaching">Teaching</a>
+      </nav>
 
-<nav>
-    <a href="#about">About Me</a>
-    <a href="#research">Research Interests</a>
-    <a href="#publications">Publications</a>
-    <a href="#conferences">Conferences</a>
-    <a href="#awards">Awards</a>
-</nav>
+      <button class="nav-toggle btn" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+        Menu
+      </button>
+    </div>
+  </header>
 
-<section id="about">
-    <h2>😊 About Me</h2>
-    <div class="about-content">
-        <p>Hi there! I'm currently a PhD student in chemical engineering and applied chemistry at the University of Toronto. My research revolves around the acceleration of material discovery using deep learning and exploring the multimodality of metal-organic frameworks. Feel free to connect with me on LinkedIn or BlueSky if you are ever interested in talking about chemistry, cheminformatics, material science, engineering or just life!</p>
-        <img src="images/1708741507135.jpg" alt="Your Photo">
-    </div>
-    <div class="about-links">
-        <a href="https://github.com/sartaajkhan" target="_blank"><img src="images/github.png" alt="GitHub"></a>
-        <a href="images/cv.pdf" target="_blank"><img src="images/cv.png" alt="CV"></a>
-        <a href="https://scholar.google.com/citations?user=4Pk-wOIAAAAJ&hl=en" target="_blank"><img src="images/googlescholar.png" alt="Google Scholar"></a>
-        <a href="https://www.linkedin.com/in/sartaaj-khan-274a14179/" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
-        <a href="https://bsky.app/profile/sartaajkhan.bsky.social" target="_blank"><img src="images/bluesky.png" alt="BlueSky"></a>
-    </div>
-</section>
+  <!-- ===== Hero ===== -->
+  <main class="wrap">
+    <section class="hero" id="about">
+      <div class="hero-grid">
+        <div>
+          <h2>Advancing <em style="font-style:normal; color:var(--brand)">data-driven materials</em> for climate and energy.</h2>
+          <p>I am a PhD candidate in the <strong>Department of Chemical Engineering and Applied Chemistry</strong> at the <strong>University of Toronto</strong>. My work involves building geometry-aware representations of metal-organic frameworks (MOFs) in machine/deep learning. If you ever want to talk about AI, chemistry, material science, computer science or just about life, feel free to contact me!</p>
+          <!-- <div class="cta">
+            <a class="btn-lg primary" href="#publications" aria-label="View publications">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M20 22H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2H20z"/></svg>
+              Publications
+            </a>
+            <a class="btn-lg" href="#cv">CV <span class="mono">PDF</span></a>
+            <a class="btn-lg" href="#contact">Email me</a>
+          </div> -->
+          <div class="iconbar" aria-label="Profile links">
+  <!-- Google Scholar -->
+  <a class="icon-btn" href="https://scholar.google.com/citations?user=4Pk-wOIAAAAJ&hl=en"
+     target="_blank" rel="noopener" aria-label="Google Scholar">
+    <img src="images/googlescholar.png" alt="" />
+    <span class="sr-only">Google Scholar</span>
+  </a>
 
-<section id="research">
-    <h2>🧪 Research Interests</h2>
-    <div class="research-item">
-        <h3>Deep learning in MOFs</h3>
-        <p>There is a huge incentive (especially now!) with exploring deep learning in MOFs. When designing MOFs, there are millions of possible permutations between the set of available metals and organic linkers - which also means that doing experimental synthesis or screening through molecular dynamics would be extremely expensive and time-consuming. Machine (and deep) learning offers a much cheaper and faster way of exploring this space, while not sacrificing much in terms of performance. Not only does deep learning lay the foundation of the acceleration of material discovery in MOFs, but it also lays the foundation of application discovery! At the end of the day, we want to find MOFs with a diverse set of applications - and deep learning gives us a way of finding these.</p>
-        <img src="images/DL.png" alt="DL Diagram">
-        <figcaption style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #555;">In one of my previous works, a deep learning model was able to discover MOFs with a diverse set of applications ranging from storage to carbon capture!</figcaption>
-    </div>
-    <div class="research-item">
-        <h3>Multimodality in material science</h3>
-        <p>In many cases, a single modality is insufficient for creating robust models. This is especially true for metal-organic frameworks (MOFs), where both the chemical composition and structural geometry must be adequately represented to build effective models that can accelerate material discovery. Therefore, it is essential to combine multiple modalities. Examples of modalities in MOFs include atomistic embeddings of the crystal structure, energy grids, textual representations like SMILES or MOFid, spectral data (e.g., PXRD, NMR), chemical descriptors (e.g., revised autocorrelations), and geometric descriptors (e.g., largest included sphere, free sphere, accessible surface area, and volumes). However, multimodality raises important questions, such as determining which modalities are most appropriate for specific scenarios. Ideally, the chosen modalities should be readily available or easy to obtain close to the synthesis stage.</p>
-        <img src="images/1734773850607.png" alt="Multimodality Diagram">
-        <figcaption style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #555;">Here is one of my previous multimodal model works, in which PXRDs (captures geometry) and the SMILES of the precursors (captures the metal and organic chemistry) combined together to predict any geometric, chemical and electronic property of a MOF.</figcaption>
-    </div>
-    <div class="research-item">
-        <h3>Generative design of materials</h3>
-        <p>One of my current interests is to perform generative design of MOFs using available modalities. With generative design, there are many incentives - but the most important ones are that it removes the complexity of constructing computational structures of MOFs and it allows greater amounts of discovery of brand new MOFs. Currently, MOF generative designs exist in the form of diffusion models, variational autoencoders and can even leverage large language models - but I wish to explore and expand on this.</p>
-        <img src="images/gen_design2-modified.png" alt="Generative Diagram">
-        <figcaption style="text-align: center; margin-top: 10px; font-size: 0.9em; color: #555;">An example of structure generation, reconstruction and property predictions through the use of a VAE (done by Ochiai et al.) for molecules!</figcaption>
-    </div>
-</section>
+  <!-- GitHub -->
+  <a class="icon-btn" href="https://github.com/sartaajkhan"
+     target="_blank" rel="noopener" aria-label="GitHub">
+    <img src="images/github.png" alt="" />
+    <span class="sr-only">GitHub</span>
+  </a>
 
-<section id="publications">
-    <h2>🚀 Publications</h2>
-    <p>Will be updating as my PhD carries on... For a full list, check out my <a href="https://scholar.google.com/citations?user=4Pk-wOIAAAAJ&hl=en">Google Scholar!</a></p>
-    <ul>
-        <li><strong>Khan, S. T.</strong>, Moosavi, S. M. (2025). Connecting metal-organic framework synthesis to applications using multimodal machine learning. Nature Communications, 16(1), 5642.</li>
-        <li>Ai, Q., <strong>Khan, S. T.</strong>, Barthel, S., Moosavi, S. M (2025). “Capturing Global Features of Crystals from Their Bond Networks.” AI4Mat Workshop ICLR-2025</li>
-        <li>Kochi, M. R., Rezaei, H., <strong>Khan, S. T.</strong>, Mamillapalli, B. T., Ebrahimiazar, M., Ye, H., ... & Moosavi, S. M. (2025). Thermodynamics-informed machine learning for predicting temperature-dependent chemical properties.</li>
-        <li>Pruyn, T. M., Aswad, A., <strong>Khan, S. T.</strong>, Black, R., & Moosavi, S. M. (2025). MOF-ChemUnity: Unifying metal-organic framework data using large language models.</li>
-        <li>Zimmermann, Y., ..., <strong>Khan, S. T.</strong>, ... & Blaiszik, B. (2025). 34 Examples of LLM Applications in Materials Science and Chemistry: Towards Automation, Assistants, Agents, and Accelerated Scientific Discovery. arXiv preprint arXiv:2505.03049.</li>
-        <li>Zimmermann, Y., …, <strong>Khan, S. T.</strong>, et al. (2024) “Reflections from the 2024 Large Language Model (LLM) Hackathon for Applications in Materials Science and Chemistry” (preprint available on arXiv)</li>
+  <!-- LinkedIn -->
+  <a class="icon-btn" href="https://www.linkedin.com/in/sartaaj-khan-274a14179/"
+     target="_blank" rel="noopener" aria-label="LinkedIn">
+    <img src="images/linkedin.png" alt="" />
+    <span class="sr-only">LinkedIn</span>
+  </a>
+
+<!-- CV (PDF) -->
+  <a class="icon-btn" href="images/cv.pdf"
+     target="_blank" rel="noopener" aria-label="CV">
+    <img src="images/cv.png" alt="" />
+    <span class="sr-only">CV</span>
+  </a>
+
+  <!-- BlueSky -->
+  <a class="icon-btn" href="https://bsky.app/profile/sartaajkhan.bsky.social"
+     target="_blank" rel="noopener" aria-label="BlueSky">
+    <img src="images/bluesky.png" alt="" />
+    <span class="sr-only">BlueSky</span>
+  </a>
+</div>
+
+        </div>
+
+        <aside class="portrait" aria-label="Profile photo">
+          <img src="images/1708741507135.jpg" alt="Portrait of Sartaaj Khan" width="900" height="1200"/>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== Research Highlights ===== -->
+    <section id="research">
+      <div class="section-head">
+        <h3>🧪 Research Interests</h3>
+      </div>
+
+      <div class="grid cols-3">
+        <!-- Card 1 -->
+        <article class="card">
+          <div class="media">
+            <img src="images/DL_11zon.png" alt="Multimodal ML figure"/>
+          </div>
+          <div class="body">
+            <div class="eyebrow">2025 • Connecting metal-organic framework synthesis to applications using multimodal machine learning</div>
+            <h4 class="title">Screening for MOF applications in sustainable energy</h4>
+            <p class="meta">We want to leverage data readily available upon MOF synthesis and use that to directly recommend MOFs for applications such as carbon capture, gas storage and semiconductors.</p>
+            <div class="tags">
+              <span class="tag">Multimodal ML</span>
+              <span class="tag">Water stability</span>
+              <span class="tag">Carbon capture</span>
+              <span class="tag">XRD</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card">
+          <div class="media">
+            <img src="images/lqg-fig-1-new.png" alt="Topology/structure graphic"/>
+          </div>
+          <div class="body">
+            <div class="eyebrow">2025 • Capturing non-local features of crystals from their bond networks</div>
+            <h4 class="title">Geometry-aware representations for porous crystals</h4>
+            <p class="meta">A big challenge in existing methods is capturing long-range interactions (and geometry) of porous crystals. Building new representations and algorithms that can capture this aids in the prediction of geometry-reliant MOF properties such as mechanical properties, gas separation and charge transport.</p>
+            <div class="tags"><span class="tag">Descriptors</span><span class="tag">GNN</span><span class="tag">Topology</span></div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <div class="media">
+            <img src="images/ChemUnity.png" alt="MOF database pipeline diagram"/>
+          </div>
+          <div class="body">
+            <div class="eyebrow">2025 • MOF-ChemUnity: Unifying MOF data using large language models</div>
+            <h4 class="title">MOF Database Development</h4>
+            <p class="meta">Using large language models (LLMs), it is now possible to use extraction methods to construct MOF databases that link experimental and existing computational methods together. However, proper curation of these databases is needed for the development of benchmarks to build robust ML models.</p>
+            <div class="tags"><span class="tag">Large language model (LLM)</span><span class="tag">Benchmarks</span><span class="tag">Curation</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Publications (APA) ===== -->
+    <section id="publications" class="wrap">
+      <div class="section-head">
+        <h3>🚀 Publications</h3>
+        <p>Please refer to my <a href="https://scholar.google.com/citations?user=4Pk-wOIAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a> for my full list of authored works.</p>
+      </div>
+
+      <ol class="pub-apa" aria-label="APA formatted publications">
+        <!-- Example 1 -->
+        <li itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <p class="cite">
+            <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
+            <span> &amp; <span class="authors" itemprop="author">Moosavi, S. M.</span></span>
+            <span class="year"> (2025).</span>
+            <span class="title" itemprop="name"> Connecting metal-organic framework synthesis to applications using multimodal machine learning.</span>
+            <span class="journal" itemprop="isPartOf"> <em>Nature Communications</em></span>,
+            <span class="volume" itemprop="volumeNumber">16</span>,
+            <span class="pages" itemprop="pagination">5642</span>.
+        </p>
+
+        <div class="actions">
+            <a class="chip" href="https://www.nature.com/articles/s41467-025-60796-0" target="_blank" rel="noopener">Open access</a>
+            <a class="chip" href="https://github.com/AI4ChemS/XRayPro" target="_blank" rel="noopener">Code</a>
+            <button class="chip" type="button" data-copy="#apa1">Copy APA</button>
+        </div>
+
+        <!-- Copy-ready APA (includes DOI; volume italicized by style when rendered) -->
+        <p id="apa1" class="sr-only">
+        Khan, S. T., & Moosavi, S. M. (2025). Connecting metal-organic framework synthesis to applications using multimodal machine learning. *Nature Communications, 16*, 5642. https://doi.org/10.1038/s41467-025-60796-0
+        </p>
+        </li>
+
+
+        <!-- Example 2 -->
+        <li itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <p class="cite">
+            <span class="authors" itemprop="author">Ai, Q.,</span>
+            <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
+            <span class="authors" itemprop="author">Barthel, S.,</span>
+            <span> &amp; <span class="authors" itemprop="author">Moosavi, S. M.</span></span>
+            <span class="year"> (2025, March).</span>
+            <span class="title" itemprop="name"> Capturing global features of crystals from their bond networks.</span>
+            <span class="journal" itemprop="isPartOf"> <em>AI for Accelerated Materials Design (ICLR 2025)</em>.</span>
+        </p>
+
+        <!-- Equal-contribution note (outside the APA line) -->
+        <div class="note"><span class="mark" aria-hidden="true">†</span>Co-first author (equal contribution).</div>
+
+        <div class="actions">
+            <a class="chip" href="https://openreview.net/forum?id=wLSmBbYDY5" target="_blank" rel="noopener">Open access</a>
+            <a class="chip" href="https://github.com/qai222/CrystalGraph/tree/main" target="_blank" rel="noopener">Code</a>
+            <button class="chip" type="button" data-copy="#apa2">Copy APA</button>
+        </div>
+
+        <!-- What gets copied (APA reference itself does not include the co-first note) -->
+        <p id="apa2" class="sr-only">
+        Ai, Q., Khan, S. T., Barthel, S., & Moosavi, S. M. (2025, March). Capturing global features of crystals from their bond networks. *AI for Accelerated Materials Design (ICLR 2025)*. https://openreview.net/forum?id=wLSmBbYDY5
+        </p>
+        </li>
+
+        <!-- MOF-ChemUnity (2025) -->
+        <li itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <p class="cite">
+            <span class="authors" itemprop="author">Pruyn, T. M.,</span>
+            <span class="authors" itemprop="author">Aswad, A.,</span>
+            <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
+            <span class="authors" itemprop="author">Black, R.,</span>
+            <span> &amp; <span class="authors" itemprop="author">Moosavi, S. M.</span></span>
+            <span class="year"> (2025).</span>
+            <span class="title" itemprop="name"> MOF-ChemUnity: Unifying metal-organic framework data using large language models.</span>
+            <span class="journal" itemprop="isPartOf"> <em>Under review in Journal of American Chemical Society</em>.</span>
+        </p>
+        <div class="actions">
+            <a class="chip" href="https://chemrxiv.org/engage/chemrxiv/article-details/6838df8bc1cb1ecda036f363" target="_blank" rel="noopener">Open access</a>
+            <a class="chip" href="https://github.com/AI4ChemS/MOF_ChemUnity" target="_blank" rel="noopener">Code</a>
+            <button class="chip" type="button" data-copy="#apa3">Copy APA</button>
+        </div>
+        <p id="apa3" class="sr-only">
+        Pruyn, T. M., Aswad, A., Khan, S. T., Black, R., & Moosavi, S. M. (2025). MOF-ChemUnity: Unifying metal-organic framework data using large language models. *Preprint*.
+        </p>
+        </li>
+
+        <!-- 32 examples of LLM apps (2025) -->
+        <li itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <p class="cite">
+            <span class="authors" itemprop="author">Zimmermann, Y.,</span>
+            <span class="authors" itemprop="author">Bazgir, A.,</span>
+            <span> …, </span>
+            <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
+            <span> …, &amp; </span>
+            <span class="authors" itemprop="author">Blaiszik, B.</span>
+            <span class="year"> (2025).</span>
+            <span class="title" itemprop="name"> 32 examples of LLM applications in materials science and chemistry: Towards automation, assistants, agents, and accelerated scientific discovery.</span>
+            <span class="journal" itemprop="isPartOf"> <em>Machine Learning: Science and Technology</em>.</span>
+        </p>
+        <div class="actions">
+            <a class="chip" href="https://iopscience.iop.org/article/10.1088/2632-2153/ae011a/meta" target="_blank" rel="noopener">Open access</a>
+            <a class="chip" href="https://github.com/mehradans92/PoreVoyant/tree/main" target="_blank" rel="noopener">Code</a>
+            <button class="chip" type="button" data-copy="#apa4">Copy APA</button>
+        </div>
+        <p id="apa4" class="sr-only">
+        Zimmermann, Y., Bazgir, A., …, Khan, S. T., …, & Blaiszik, B. (2025). 32 examples of LLM applications in materials science and chemistry: Towards automation, assistants, agents, and accelerated scientific discovery. *Machine Learning: Science and Technology*.
+        </p>
+        </li>
+
+        <!-- Thermodynamics-informed ML (2025) -->
+        <li itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <p class="cite">
+            <span class="authors" itemprop="author">Kochi, M. R.,</span>
+            <span class="authors" itemprop="author">Rezaei, H.,</span>
+            <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
+            <span class="authors" itemprop="author">Mamillapalli, B. T.,</span>
+            <span class="authors" itemprop="author">Ebrahimiazar, M.,</span>
+            <span class="authors" itemprop="author">Ye, H.,</span>
+            <span> … &amp; </span>
+            <span class="authors" itemprop="author">Moosavi, S. M.</span>
+            <span class="year"> (2025).</span>
+            <span class="title" itemprop="name"> Thermodynamics-informed machine learning for predicting temperature-dependent chemical properties.</span>
+            <span class="journal" itemprop="isPartOf"> <em>Preprint</em>.</span>
+        </p>
+        <div class="actions">
+            <a class="chip" href="https://chemrxiv.org/engage/chemrxiv/article-details/6838e72e3ba0887c33b6d4b1" target="_blank" rel="noopener">Open access</a>
+            <a class="chip" href="https://github.com/AI4ChemS/thermoML" target="_blank" rel="noopener">Code</a>
+            <button class="chip" type="button" data-copy="#apa5">Copy APA</button>
+        </div>
+        <p id="apa5" class="sr-only">
+        Kochi, M. R., Rezaei, H., Khan, S. T., Mamillapalli, B. T., Ebrahimiazar, M., Ye, H., … & Moosavi, S. M. (2025). Thermodynamics-informed machine learning for predicting temperature-dependent chemical properties. *Preprint*.
+        </p>
+        </li>
+
+        <!-- LLM Hackathon reflections (2024) -->
+        <li itemscope itemtype="https://schema.org/ScholarlyArticle">
+        <p class="cite">
+            <span class="authors" itemprop="author">Zimmermann, Y.,</span>
+            <span class="authors" itemprop="author">Bazgir, A.,</span>
+            <span> …, </span>
+            <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
+            <span> … &amp; </span>
+            <span class="authors" itemprop="author">Blaiszik, B.</span>
+            <span class="year"> (2024).</span>
+            <span class="title" itemprop="name"> Reflections from the 2024 large language model (LLM) hackathon for applications in materials science and chemistry.</span>
+            <span class="journal" itemprop="isPartOf"> <em>arXiv</em> preprint (arXiv:2411.15221).</span>
+        </p>
+        <div class="actions">
+            <a class="chip" href="https://arxiv.org/abs/2411.15221" target="_blank" rel="noopener">Open access</a>
+            <button class="chip" type="button" data-copy="#apa6">Copy APA</button>
+        </div>
+        <p id="apa6" class="sr-only">
+        Zimmermann, Y., Bazgir, A., …, Khan, S. T., … & Blaiszik, B. (2024). Reflections from the 2024 large language model (LLM) hackathon for applications in materials science and chemistry. *arXiv* preprint (arXiv:2411.15221). https://arxiv.org/abs/2411.15221
+        </p>
+        </li>
+
+
+      </ol>
+    </section>
+
+    <section id="awards">
+    <div class="section-head">
+        <h3>🏆 Awards</h3>
+        <p>Selected scholarships, awards and honours.</p>
+    </div>
+
+    <ul class="awards" aria-label="Awards list">
+        <li class="award">
+        <h4 class="title">Queen Elizabeth II Graduate Scholarship in Science &amp; Technology</h4>
+        <p class="desc">The Queen Elizabeth II Graduate Scholarship in Science and Technology (QEII‐GSST) program is designed to encourage excellence in graduate studies in science and technology. The program is supported through funds provided by the Ministry of Colleges and Universities and funds raised by the University of Toronto from the private sector. Visit <a href="https://www.sgs.utoronto.ca/awards/queen-elizabeth-ii-graduate-scholarship-in-science-technology/">this</a> for more information.</p>
+        <div class="meta">
+            <span class="pill"><strong>Amount:</strong>$15,000</span>
+            <span class="pill"><strong>Period:</strong>Sept 2025 - Sept 2026</span>
+        </div>
+        </li>
+
+        <li class="award">
+        <h4 class="title">University of Toronto Fellowship</h4>
+        <p class="desc">Received upon admission into the Masters of Applied Science (MASc) program at the University of Toronto in Chemical Engineering and Applied Chemistry for academic and professional achievements.</p>
+        <div class="meta">
+            <span class="pill"><strong>Amount:</strong>$13,200</span>
+            <span class="pill"><strong>Period:</strong>Sept 2023 - Sept 2025</span>
+        </div>
+        </li>
+
+        <li class="award">
+        <h4 class="title">LLM Hackathon in Chemistry and Material Science</h4>
+        <p class="desc">Awarded 3rd place ($250 prize funded by Radical AI and Anthropic) in the LLM Hackathon for Applications in Materials and Chemistry for the development of PoreVoyant - a chemistry-informed AI agent that can generate new linkers to decrease the band gap in metal-organic frameworks while leveraging MOF literature. This work was featured in a <a href="https://medium.com/@blaiszik/llms-to-accelerate-discovery-in-materials-science-and-chemistry-refections-on-a-hackathon-b8364ca32242">Medium Article</a>.</p>
+        <div class="meta">
+            <span class="pill"><strong>Amount:</strong>$250</span>
+            <span class="pill"><strong>Period:</strong>May 2024</span>
+        </div>
+        </li>
+
+        <li class="award">
+        <h4 class="title">Bayesian Optimization in Chemistry and Material Science Hackathon</h4>
+        <p class="desc">Awarded <a href="https://ac-bo-hackathon.github.io/">2nd place</a> ($500 CAD prize funded by Acceleration Consortium) in the Bayesian Optimization for Chemistry and Materials Hackathon hosted by Acceleration Consortium at the University of Toronto. The project involved the application of Bayesian Optimization to accelerate the discovery of fluids with the highest heat transfer coefficients. The repository can be found <a href="https://github.com/sartaajkhan/BOMS-ProBs">here</a>.</p>
+        <div class="meta">
+            <span class="pill"><strong>Amount:</strong>$500</span>
+            <span class="pill"><strong>Period:</strong>March 2024</span>
+        </div>
+        </li>
+
+        <li class="award">
+        <h4 class="title">NSERC USRA</h4>
+        <p class="desc">Award of $6000 CAD issued for completion of 16 weeks of research work for the summer 2020 term and high academic achievements.</p>
+        <div class="meta">
+            <span class="pill"><strong>Amount:</strong>$6,000</span>
+            <span class="pill"><strong>Period:</strong>May 2020 - Sept 2020</span>
+        </div>
+        </li>
     </ul>
-</section>
+    </section>
 
-<section id="conferences">
-    <h2>🌎 Conferences</h2>
-    <ul>
-        <li><strong>ICLR (AI4Mat track)</strong>: Presented poster "Capturing Global Features of Crystals from Their Bond Networks", Singapore, 2025</li>
-        <li><strong>NeurIPS (AI4Mat track)</strong>: Presented poster "XRayPro: A self-supervised multimodal model for MOF application recommendations using PXRD and precursors", Vancouver, British Columbia, 2024. Paper available <a href="https://openreview.net/forum?id=dduB0yFN3w" target="_blank">here!</a></li>
-        <li><strong>CSChE</strong>: Gave a talk on "Unveiling Property Insights and Recommending MOF Applications from X-Ray Diffraction Patterns using Self-Supervised Transformer Models", Toronto, Ontario, 2024.</li>
-        <li><strong>Accelerate Conference</strong>: Presented poster "Using a self-supervised transformer model for property predictions and MOF application recommendations with only x-ray diffraction patterns", Vancouver, British Columbia, 2024.</li>
-    </ul>
-    <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;">
-        <img src="images/NeurIPS_logo.png" alt="NeurIPS Logo" style="width: auto; height: 80px;">
-        <img src="images/csche-logo.png" alt="CSChE Logo" style="width: 100px; height: auto;">
-        <img src="images/ac.png" alt="Acceleration Consortium Logo" style="width: auto; height: 80px;">
+
+    <!-- ===== Software ===== -->
+    <section id="projects">
+      <div class="section-head">
+        <h3>🤖 Software and Datasets</h3>
+        <p>Open-source tools and datasets supporting the community.</p>
+      </div>
+
+      <div class="grid cols-3">
+        <article class="card">
+          <div class="body">
+            <div class="eyebrow">MOF recommendation system</div>
+            <h4 class="title">XRayPro</h4>
+            <p class="meta">A recommendation system for MOFs leveraging only PXRDs and precursors.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="body">
+            <div class="eyebrow">Physics-informed ML</div>
+            <h4 class="title">ThermoML</h4>
+            <p class="meta">Thermodynamic-informed model for predicting thermophysical properties of fluids.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="body">
+            <div class="eyebrow">MOF database</div>
+            <h4 class="title">MOF-ChemUnity</h4>
+            <p class="meta">A knowledge graph unifying computational and experimental data for MOFs.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="body">
+            <div class="eyebrow">Solution chemistry</div>
+            <h4 class="title">pySolution</h4>
+            <p class="meta">A solution chemistry toolkit that computes solution characteristics for modeling purposes.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="teaching">
+    <div class="section-head">
+        <h3>🎓 Teaching</h3>
+        <p>Courses and instructional roles.</p>
     </div>
-</section>
 
-<section id="awards">
-    <h2>🏆 Awards</h2>
-    <ul>
-        <li><strong>LLMs in Chemistry and Materials Hackathon (2024)</strong> Awarded 3rd place ($250 prize funded by Radical AI and Anthropic) in the LLM Hackathon for Applications in Materials and Chemistry for the development of PoreVoyant - a chemistry-informed AI agent that can generate new linkers to decrease the band gap in metal-organic frameworks while leveraging MOF literature. This work was featured in a <a href="https://medium.com/@blaiszik/llms-to-accelerate-discovery-in-materials-science-and-chemistry-refections-on-a-hackathon-b8364ca32242" target="_blank">Medium Article</a>. The GitHub repository can be found <a href="https://github.com/mehradans92/PoreVoyant/tree/main" target="_blank">here.</a></li>
-        <li><strong>Bayesian Optimization for Chemistry and Materials Hackathon (2024)</strong> Awarded <a href="https://ac-bo-hackathon.github.io/">2nd place</a> ($500 CAD prize funded by Acceleration Consortium) in the Bayesian Optimization for Chemistry and Materials Hackathon hosted by Acceleration Consortium at the University of Toronto. The project involved the application of Bayesian Optimization to accelerate the discovery of fluids with the highest heat transfer coefficients. The repository can be found <a href="https://github.com/sartaajkhan/BOMS-ProBs">here.</a></li>
-        <li><strong>NSERC USRA (2020)</strong> Award of $6000 CAD issued for completion of 16 weeks of research work for the summer 2020 term and high academic achievements.</li>
+    <ul class="teaching" aria-label="Teaching roles">
+        <li class="teach-card">
+        <h4 class="title">DEL-Bootcamp for Drug Discovery</h4>
+        <!-- <p class="desc">[Brief description — e.g., co-designed and delivered modules on ML for DEL datasets, assay design, and hit triaging.]</p> -->
+        <div class="meta">
+            <span class="pill"><strong>Period:</strong>Feb 2024 - Present</span>
+            <span class="pill"><strong>Role:</strong>ML Tutor</span>
+        </div>
+        </li>
+
+        <li class="teach-card">
+        <h4 class="title">CHE260: Thermodynamics and Heat Transfer</h4>
+        <!-- <p class="desc">[Brief description — e.g., led tutorials, created problem sets, and held office hours covering energy balances, cycles, and convective heat transfer.]</p> -->
+        <div class="meta">
+            <span class="pill"><strong>Period:</strong>Sept 2025 - Present</span>
+            <span class="pill"><strong>Role:</strong>Teaching Assistant (TA)</span>
+        </div>
+        </li>
+
+        <li class="teach-card">
+        <h4 class="title">CHE333: Chemical Reaction Engineering</h4>
+        <!-- <p class="desc">[Brief description — e.g., guided reactor design labs, kinetics derivations, and numerical modeling in Python.]</p> -->
+        <div class="meta">
+            <span class="pill"><strong>Period:</strong>Jan 2026 - Present</span>
+            <span class="pill"><strong>Role:</strong>Grader</span>
+        </div>
+        </li>
     </ul>
-</section>
+    </section>
 
-<footer>
-    <p>&copy; 2024 Sartaaj Khan <a href="#">Back to top</a></p>
-</footer>
+  </main>
 
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="wrap foot-grid">
+      <div>© <span id="year"></span> Sartaaj Khan. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Year + Copy APA helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.querySelectorAll('[data-copy]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const target = document.querySelector(btn.dataset.copy);
+        if(!target) return;
+        navigator.clipboard.writeText(target.textContent.trim());
+        const old = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(()=>btn.textContent = old, 1200);
+      });
+    });
+  </script>
 </body>
 </html>
