@@ -44,6 +44,9 @@
     a:hover{opacity:.9}
     img{display:block; max-width:100%; height:auto}
 
+    /* Anchor offset so sticky header doesn't cover section targets */
+    :target{ scroll-margin-top: 84px; }
+
     /* Container */
     .wrap{max-width:var(--maxw); margin-inline:auto; padding-inline: clamp(16px, 4vw, 28px);}
 
@@ -60,7 +63,14 @@
     .nav-links{display:flex; gap:14px; align-items:center}
     .nav-links a{color:var(--brand-ink); padding:8px 10px; border-radius:10px}
     .nav-links a:hover{background:rgba(2,6,23,.04)}
-    .nav-toggle{display:none}
+    .nav-toggle{
+      display:none;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      font-weight:600;
+    }
 
     /* Hero */
     .hero{padding: clamp(48px, 8vw, 96px) 0 28px}
@@ -85,7 +95,7 @@
     .portrait img{
       width:100%;
       border-radius: calc(var(--radius-xl) - 6px);
-      background:#fff;                  /* seamless white */
+      background:#fff;
       outline: 1px solid rgba(0,0,0,0.02);
       filter: drop-shadow(0 0 0 rgba(0,0,0,0));
     }
@@ -120,7 +130,7 @@
     .card .media img{
       width:100%;
       height:100%;
-      object-fit: cover;   /* neat crop; switch to 'contain' to avoid cropping */
+      object-fit: cover;   /* switch to 'contain' to avoid cropping */
       background:#fff;
     }
 
@@ -132,49 +142,29 @@
     .tag{padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#fff; font-size:.92rem; color:#374151}
 
     /* === APA Publications === */
-    /* APA: uniform font size + italic journal */
     .pub-apa .cite{
-    font-size: 1rem;          /* one size for all text in the citation */
-    line-height: 1.65;
-    text-indent: -22px;
-    padding-left: 22px;
-    }
-    .pub-apa .cite *{
-    font-size: inherit;       /* authors/year/title/journal/etc inherit same size */
-    }
-    .pub-apa .journal{
-    font-style: italic;       /* ensure journal is italic */
-    }
-
-    /* Slight vertical spacing between publications */
-    :root { --pub-gap: 14px; }  /* tweak 10–18px to taste */
-    .pub-apa li + li { margin-top: var(--pub-gap); }
-
-    :root { --pub-gap: 16px; }        /* spacing between items */
-    .pub-apa li{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding:16px 18px 14px 28px;    /* left padding leaves room for hanging indent */
-    box-shadow: var(--shadow);      /* optional: remove if you want just a line */
-    }
-    .pub-apa li + li{ margin-top: var(--pub-gap); }
-
-    /* subtle hover */
-    .pub-apa li:hover{ border-color: rgba(2,6,23,.16); }
-
-
-    /* Hanging indent */
-    .pub-apa .cite {
-      margin: 0;
+      font-size: 1rem;
       line-height: 1.65;
       text-indent: -22px;
       padding-left: 22px;
-      color: var(--brand-ink);
-      font-size: 1.02rem;
     }
-    /* APA bits */
-    .pub-apa .authors { font-weight: 600; }
+    .pub-apa .cite *{ font-size: inherit; }
+    .pub-apa .journal{ font-style: italic; }
+    :root { --pub-gap: 16px; }
+    .pub-apa li{
+      list-style:none;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding:16px 18px 14px 28px;
+      box-shadow: var(--shadow);
+    }
+    .pub-apa li + li{ margin-top: var(--pub-gap); }
+    .pub-apa li:hover{ border-color: rgba(2,6,23,.16); }
+
+    .pub-apa .cite { margin: 0; line-height: 1.65; text-indent: -22px; padding-left: 22px; color: var(--brand-ink); font-size: 1.02rem; }
+    .pub-apa .authors { font-weight: 400; }
+    .pub-apa .cite .me{ font-weight: 700; }
     .pub-apa .year    { color: var(--muted); }
     .pub-apa .title   { font-weight: 700; }
     .pub-apa .journal { font-style: italic; }
@@ -183,10 +173,7 @@
     .pub-apa .pages   { color: var(--muted); }
     .pub-apa .doi a   { color: var(--brand); }
 
-    .pub-apa .actions{
-      margin-top: 10px;
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
+    .pub-apa .actions{ margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
     .chip{
       padding: 6px 10px;
       border-radius: 999px;
@@ -197,13 +184,6 @@
       text-decoration:none;
       cursor: pointer;
     }
-
-    /* Make only *your* name bold; keep others normal */
-    .pub-apa .cite .authors{ font-weight: 400; }
-    .pub-apa .cite .me{ font-weight: 700; }          /* your name */
-    .pub-apa .note{ margin-top:6px; color:var(--muted); font-size:.95rem; }
-    .pub-apa .note .mark{ font-weight:700; margin-right:4px; }
-
 
     /* Footer */
     footer{border-top:1px solid var(--line); padding:28px 0 44px; color:var(--muted)}
@@ -219,134 +199,104 @@
       transition:outline .2s ease;
     }
 
-    ol.pub-apa{
-    list-style: none;   /* no markers */
-    padding-left: 0;
-    margin-left: 0;
-    }
-    ol.pub-apa > li::marker{
-    content: "";        /* belt-and-suspenders for Safari/Edge */
-    }
+    ol.pub-apa{ padding-left: 0; margin-left: 0; }
 
     /* Utilities */
     .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
     .mono{font-family:var(--font-mono); font-size:.95rem; color:#111827; background:#f8fafc; padding:2px 6px; border-radius:6px; border:1px solid var(--line)}
 
     /* ===== Awards ===== */
-    .awards { 
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
-    display: grid; 
-    gap: 16px; 
-    }
-    .award {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    padding: 16px 18px;
-    }
-    .award .title {
-    margin: 0 0 6px;
-    font-size: var(--fs-h2);
-    color: var(--brand-ink);
-    }
-    .award .desc {
-    margin: 4px 0 12px;
-    color: #374151;
-    }
-    .award .meta {
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 8px;
-    }
+    .awards { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+    .award { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 16px 18px; }
+    .award .title { margin: 0 0 6px; font-size: var(--fs-h2); color: var(--brand-ink); }
+    .award .desc { margin: 4px 0 12px; color: #374151; }
+    .award .meta { display: flex; flex-wrap: wrap; gap: 8px; }
 
     /* ===== Teaching ===== */
-    .teaching{
-    list-style:none;
-    margin:0;
-    padding:0;
-    display:grid;
-    gap:16px;
-    }
-    .teach-card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow);
-    padding:16px 18px;
-    }
-    .teach-card .title{
-    margin:0 0 6px;
-    font-size:var(--fs-h2);
-    color:var(--brand-ink);
-    }
-    .teach-card .desc{
-    margin:4px 0 12px;
-    color:#374151;
-    }
-    .teach-card .meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    }
-    /* reuse .pill from awards for the info chips */
-
-
-    /* “fill-me-in” pills */
-    .pill {
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px dashed var(--line);
-    background: #fff;
-    font-size: .92rem;
-    color: #374151;
-    }
+    .teaching{ list-style:none; margin:0; padding:0; display:grid; gap:16px; }
+    .teach-card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:16px 18px; }
+    .teach-card .title{ margin:0 0 6px; font-size:var(--fs-h2); color:var(--brand-ink); }
+    .teach-card .desc{ margin:4px 0 12px; color:#374151; }
+    .teach-card .meta{ display:flex; flex-wrap:wrap; gap:8px; }
+    .pill { padding: 6px 10px; border-radius: 999px; border: 1px dashed var(--line); background: #fff; font-size: .92rem; color: #374151; }
     .pill strong { margin-right: 6px; }
-
-    /* optional: subtle hover polish */
     .award:hover { border-color: rgba(2,6,23,.16); }
 
     /* Icon bar for hero */
-    .iconbar{
-    display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; align-items:center;
-    }
+    .iconbar{ display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; align-items:center; }
     .icon-btn{
-    position:relative;
-    width:64px; height:64px;
-    display:grid; place-items:center;
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:12px;
-    box-shadow:var(--shadow);
-    color:var(--brand-ink);
-    transition: transform .12s ease, border-color .12s ease;
+      position:relative;
+      width:64px; height:64px;
+      display:grid; place-items:center;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      color:var(--brand-ink);
+      transition: transform .12s ease, border-color .12s ease;
     }
     .icon-btn:hover{ transform:translateY(-1px); border-color:rgba(2,6,23,.16); }
     .icon-btn svg{ width:24px; height:24px; stroke:currentColor; fill:none; stroke-width:1.75; }
-
-    /* brand tints */
     .icon-btn.scholar{ color:#4285F4; }
     .icon-btn.orcid{ color:#A6CE39; }
     .icon-btn.linkedin{ color:#0A66C2; }
     .icon-btn.bluesky{ color:#0285FF; }
-    /* PDF badge */
     .icon-btn .badge{
-    position:absolute; right:-6px; bottom:-6px;
-    padding:2px 6px; border-radius:6px; border:1px solid var(--line);
-    background:#fff; font-size:.72rem; line-height:1; font-family:var(--font-mono);
+      position:absolute; right:-6px; bottom:-6px;
+      padding:2px 6px; border-radius:6px; border:1px solid var(--line);
+      background:#fff; font-size:.72rem; line-height:1; font-family:var(--font-mono);
+    }
+    .icon-btn img{ width:48px; height:48px; object-fit:contain; display:block; image-rendering:auto; }
+
+    /* --- Mobile nav panel --- */
+    @media (max-width: 640px){
+      .nav-links{
+        display:none; /* hidden by default on mobile */
+      }
+      .nav-links.open{
+        position: fixed;
+        inset: 58px 0 auto 0;  /* below header */
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px 16px 20px;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 12px 24px rgba(2,6,23,.06);
+        z-index: 39;
+      }
+      .nav-links.open a{
+        padding: 12px 14px;
+        border-radius: 12px;
+        font-size: 1.05rem;
+      }
+      body.menu-open{ overflow:hidden; } /* prevent background scroll */
+      .hero{ padding-top: 36px; }
+      .portrait{ padding:12px; }
     }
 
-    /* use PNGs inside the same icon buttons */
-    .icon-btn img{
-    width:48px; height:48px;          /* consistent sizing */
-    object-fit:contain; display:block;
-    image-rendering:auto;
+    /* Touch-size tweaks */
+    @media (max-width: 480px){
+      .icon-btn{ width:56px; height:56px; }
+      .icon-btn img{ width:40px; height:40px; }
+      .btn-lg{ padding:12px 14px; }
     }
 
+    /* Narrow phone tightening */
+    @media (max-width: 420px){
+      .grid{ gap:14px; }
+      .card .body{ padding:14px; }
+      .title{ font-size: 1.05rem; }
+    }
 
+    /* Safer typography floor */
+    @media (max-width: 360px){
+      :root{ --fs-body: 1rem; --fs-small: .92rem; }
+      body{ font-size: var(--fs-body); }
+    }
 
+    /* Minimum touch target sizes for a11y */
+    a, .btn, .btn-lg, .chip, .icon-btn{ min-height:44px; }
   </style>
 </head>
 
@@ -361,7 +311,7 @@
         </div>
       </div>
 
-      <nav class="nav-links" aria-label="Primary">
+      <nav id="primary-nav" class="nav-links" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#research">Research</a>
         <a href="#publications">Publications</a>
@@ -370,7 +320,7 @@
         <a href="#teaching">Teaching</a>
       </nav>
 
-      <button class="nav-toggle btn" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <button class="nav-toggle btn" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
         Menu
       </button>
     </div>
@@ -383,51 +333,43 @@
         <div>
           <h2>Advancing <em style="font-style:normal; color:var(--brand)">data-driven materials</em> for climate and energy.</h2>
           <p>I am a PhD candidate in the <strong>Department of Chemical Engineering and Applied Chemistry</strong> at the <strong>University of Toronto</strong>. My work involves building geometry-aware representations of metal-organic frameworks (MOFs) in machine/deep learning. If you ever want to talk about AI, chemistry, material science, computer science or just about life, feel free to contact me!</p>
-          <!-- <div class="cta">
-            <a class="btn-lg primary" href="#publications" aria-label="View publications">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M20 22H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2H20z"/></svg>
-              Publications
-            </a>
-            <a class="btn-lg" href="#cv">CV <span class="mono">PDF</span></a>
-            <a class="btn-lg" href="#contact">Email me</a>
-          </div> -->
+
           <div class="iconbar" aria-label="Profile links">
-  <!-- Google Scholar -->
-  <a class="icon-btn" href="https://scholar.google.com/citations?user=4Pk-wOIAAAAJ&hl=en"
-     target="_blank" rel="noopener" aria-label="Google Scholar">
-    <img src="images/googlescholar.png" alt="" />
-    <span class="sr-only">Google Scholar</span>
-  </a>
+            <!-- Google Scholar -->
+            <a class="icon-btn" href="https://scholar.google.com/citations?user=4Pk-wOIAAAAJ&hl=en"
+               target="_blank" rel="noopener" aria-label="Google Scholar">
+              <img src="images/googlescholar.png" alt="" />
+              <span class="sr-only">Google Scholar</span>
+            </a>
 
-  <!-- GitHub -->
-  <a class="icon-btn" href="https://github.com/sartaajkhan"
-     target="_blank" rel="noopener" aria-label="GitHub">
-    <img src="images/github.png" alt="" />
-    <span class="sr-only">GitHub</span>
-  </a>
+            <!-- GitHub -->
+            <a class="icon-btn" href="https://github.com/sartaajkhan"
+               target="_blank" rel="noopener" aria-label="GitHub">
+              <img src="images/github.png" alt="" />
+              <span class="sr-only">GitHub</span>
+            </a>
 
-  <!-- LinkedIn -->
-  <a class="icon-btn" href="https://www.linkedin.com/in/sartaaj-khan-274a14179/"
-     target="_blank" rel="noopener" aria-label="LinkedIn">
-    <img src="images/linkedin.png" alt="" />
-    <span class="sr-only">LinkedIn</span>
-  </a>
+            <!-- LinkedIn -->
+            <a class="icon-btn" href="https://www.linkedin.com/in/sartaaj-khan-274a14179/"
+               target="_blank" rel="noopener" aria-label="LinkedIn">
+              <img src="images/linkedin.png" alt="" />
+              <span class="sr-only">LinkedIn</span>
+            </a>
 
-<!-- CV (PDF) -->
-  <a class="icon-btn" href="images/cv.pdf"
-     target="_blank" rel="noopener" aria-label="CV">
-    <img src="images/cv.png" alt="" />
-    <span class="sr-only">CV</span>
-  </a>
+            <!-- CV (PDF) -->
+            <a class="icon-btn" href="images/cv.pdf"
+               target="_blank" rel="noopener" aria-label="CV">
+              <img src="images/cv.png" alt="" />
+              <span class="sr-only">CV</span>
+            </a>
 
-  <!-- BlueSky -->
-  <a class="icon-btn" href="https://bsky.app/profile/sartaajkhan.bsky.social"
-     target="_blank" rel="noopener" aria-label="BlueSky">
-    <img src="images/bluesky.png" alt="" />
-    <span class="sr-only">BlueSky</span>
-  </a>
-</div>
-
+            <!-- BlueSky -->
+            <a class="icon-btn" href="https://bsky.app/profile/sartaajkhan.bsky.social"
+               target="_blank" rel="noopener" aria-label="BlueSky">
+              <img src="images/bluesky.png" alt="" />
+              <span class="sr-only">BlueSky</span>
+            </a>
+          </div>
         </div>
 
         <aside class="portrait" aria-label="Profile photo">
@@ -499,7 +441,7 @@
       <ol class="pub-apa" aria-label="APA formatted publications">
         <!-- Example 1 -->
         <li itemscope itemtype="https://schema.org/ScholarlyArticle">
-        <p class="cite">
+          <p class="cite">
             <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
             <span> &amp; <span class="authors" itemprop="author">Moosavi, S. M.</span></span>
             <span class="year"> (2025).</span>
@@ -507,24 +449,22 @@
             <span class="journal" itemprop="isPartOf"> <em>Nature Communications</em></span>,
             <span class="volume" itemprop="volumeNumber">16</span>,
             <span class="pages" itemprop="pagination">5642</span>.
-        </p>
+          </p>
 
-        <div class="actions">
+          <div class="actions">
             <a class="chip" href="https://www.nature.com/articles/s41467-025-60796-0" target="_blank" rel="noopener">Open access</a>
             <a class="chip" href="https://github.com/AI4ChemS/XRayPro" target="_blank" rel="noopener">Code</a>
             <button class="chip" type="button" data-copy="#apa1">Copy APA</button>
-        </div>
+          </div>
 
-        <!-- Copy-ready APA (includes DOI; volume italicized by style when rendered) -->
-        <p id="apa1" class="sr-only">
-        Khan, S. T., & Moosavi, S. M. (2025). Connecting metal-organic framework synthesis to applications using multimodal machine learning. *Nature Communications, 16*, 5642. https://doi.org/10.1038/s41467-025-60796-0
-        </p>
+          <p id="apa1" class="sr-only">
+            Khan, S. T., & Moosavi, S. M. (2025). Connecting metal-organic framework synthesis to applications using multimodal machine learning. *Nature Communications, 16*, 5642. https://doi.org/10.1038/s41467-025-60796-0
+          </p>
         </li>
-
 
         <!-- Example 2 -->
         <li itemscope itemtype="https://schema.org/ScholarlyArticle">
-        <p class="cite">
+          <p class="cite">
             <span class="authors" itemprop="author">Ai, Q.,</span>
             <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
             <span class="authors" itemprop="author">Barthel, S.,</span>
@@ -532,26 +472,24 @@
             <span class="year"> (2025, March).</span>
             <span class="title" itemprop="name"> Capturing global features of crystals from their bond networks.</span>
             <span class="journal" itemprop="isPartOf"> <em>AI for Accelerated Materials Design (ICLR 2025)</em>.</span>
-        </p>
+          </p>
 
-        <!-- Equal-contribution note (outside the APA line) -->
-        <div class="note"><span class="mark" aria-hidden="true">†</span>Co-first author (equal contribution).</div>
+          <div class="note"><span class="mark" aria-hidden="true">†</span>Co-first author (equal contribution).</div>
 
-        <div class="actions">
+          <div class="actions">
             <a class="chip" href="https://openreview.net/forum?id=wLSmBbYDY5" target="_blank" rel="noopener">Open access</a>
             <a class="chip" href="https://github.com/qai222/CrystalGraph/tree/main" target="_blank" rel="noopener">Code</a>
             <button class="chip" type="button" data-copy="#apa2">Copy APA</button>
-        </div>
+          </div>
 
-        <!-- What gets copied (APA reference itself does not include the co-first note) -->
-        <p id="apa2" class="sr-only">
-        Ai, Q., Khan, S. T., Barthel, S., & Moosavi, S. M. (2025, March). Capturing global features of crystals from their bond networks. *AI for Accelerated Materials Design (ICLR 2025)*. https://openreview.net/forum?id=wLSmBbYDY5
-        </p>
+          <p id="apa2" class="sr-only">
+            Ai, Q., Khan, S. T., Barthel, S., & Moosavi, S. M. (2025, March). Capturing global features of crystals from their bond networks. *AI for Accelerated Materials Design (ICLR 2025)*. https://openreview.net/forum?id=wLSmBbYDY5
+          </p>
         </li>
 
         <!-- MOF-ChemUnity (2025) -->
         <li itemscope itemtype="https://schema.org/ScholarlyArticle">
-        <p class="cite">
+          <p class="cite">
             <span class="authors" itemprop="author">Pruyn, T. M.,</span>
             <span class="authors" itemprop="author">Aswad, A.,</span>
             <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
@@ -560,20 +498,20 @@
             <span class="year"> (2025).</span>
             <span class="title" itemprop="name"> MOF-ChemUnity: Unifying metal-organic framework data using large language models.</span>
             <span class="journal" itemprop="isPartOf"> <em>Under review in Journal of American Chemical Society</em>.</span>
-        </p>
-        <div class="actions">
+          </p>
+          <div class="actions">
             <a class="chip" href="https://chemrxiv.org/engage/chemrxiv/article-details/6838df8bc1cb1ecda036f363" target="_blank" rel="noopener">Open access</a>
             <a class="chip" href="https://github.com/AI4ChemS/MOF_ChemUnity" target="_blank" rel="noopener">Code</a>
             <button class="chip" type="button" data-copy="#apa3">Copy APA</button>
-        </div>
-        <p id="apa3" class="sr-only">
-        Pruyn, T. M., Aswad, A., Khan, S. T., Black, R., & Moosavi, S. M. (2025). MOF-ChemUnity: Unifying metal-organic framework data using large language models. *Preprint*.
-        </p>
+          </div>
+          <p id="apa3" class="sr-only">
+            Pruyn, T. M., Aswad, A., Khan, S. T., Black, R., & Moosavi, S. M. (2025). MOF-ChemUnity: Unifying metal-organic framework data using large language models. *Preprint*.
+          </p>
         </li>
 
         <!-- 32 examples of LLM apps (2025) -->
         <li itemscope itemtype="https://schema.org/ScholarlyArticle">
-        <p class="cite">
+          <p class="cite">
             <span class="authors" itemprop="author">Zimmermann, Y.,</span>
             <span class="authors" itemprop="author">Bazgir, A.,</span>
             <span> …, </span>
@@ -583,20 +521,20 @@
             <span class="year"> (2025).</span>
             <span class="title" itemprop="name"> 32 examples of LLM applications in materials science and chemistry: Towards automation, assistants, agents, and accelerated scientific discovery.</span>
             <span class="journal" itemprop="isPartOf"> <em>Machine Learning: Science and Technology</em>.</span>
-        </p>
-        <div class="actions">
+          </p>
+          <div class="actions">
             <a class="chip" href="https://iopscience.iop.org/article/10.1088/2632-2153/ae011a/meta" target="_blank" rel="noopener">Open access</a>
             <a class="chip" href="https://github.com/mehradans92/PoreVoyant/tree/main" target="_blank" rel="noopener">Code</a>
             <button class="chip" type="button" data-copy="#apa4">Copy APA</button>
-        </div>
-        <p id="apa4" class="sr-only">
-        Zimmermann, Y., Bazgir, A., …, Khan, S. T., …, & Blaiszik, B. (2025). 32 examples of LLM applications in materials science and chemistry: Towards automation, assistants, agents, and accelerated scientific discovery. *Machine Learning: Science and Technology*.
-        </p>
+          </div>
+          <p id="apa4" class="sr-only">
+            Zimmermann, Y., Bazgir, A., …, Khan, S. T., …, & Blaiszik, B. (2025). 32 examples of LLM applications in materials science and chemistry: Towards automation, assistants, agents, and accelerated scientific discovery. *Machine Learning: Science and Technology*.
+          </p>
         </li>
 
         <!-- Thermodynamics-informed ML (2025) -->
         <li itemscope itemtype="https://schema.org/ScholarlyArticle">
-        <p class="cite">
+          <p class="cite">
             <span class="authors" itemprop="author">Kochi, M. R.,</span>
             <span class="authors" itemprop="author">Rezaei, H.,</span>
             <span class="authors"><span class="me" itemprop="author">Khan, S. T.,</span></span>
@@ -608,20 +546,20 @@
             <span class="year"> (2025).</span>
             <span class="title" itemprop="name"> Thermodynamics-informed machine learning for predicting temperature-dependent chemical properties.</span>
             <span class="journal" itemprop="isPartOf"> <em>Preprint</em>.</span>
-        </p>
-        <div class="actions">
+          </p>
+          <div class="actions">
             <a class="chip" href="https://chemrxiv.org/engage/chemrxiv/article-details/6838e72e3ba0887c33b6d4b1" target="_blank" rel="noopener">Open access</a>
             <a class="chip" href="https://github.com/AI4ChemS/thermoML" target="_blank" rel="noopener">Code</a>
             <button class="chip" type="button" data-copy="#apa5">Copy APA</button>
-        </div>
-        <p id="apa5" class="sr-only">
-        Kochi, M. R., Rezaei, H., Khan, S. T., Mamillapalli, B. T., Ebrahimiazar, M., Ye, H., … & Moosavi, S. M. (2025). Thermodynamics-informed machine learning for predicting temperature-dependent chemical properties. *Preprint*.
-        </p>
+          </div>
+          <p id="apa5" class="sr-only">
+            Kochi, M. R., Rezaei, H., Khan, S. T., Mamillapalli, B. T., Ebrahimiazar, M., Ye, H., … & Moosavi, S. M. (2025). Thermodynamics-informed machine learning for predicting temperature-dependent chemical properties. *Preprint*.
+          </p>
         </li>
 
         <!-- LLM Hackathon reflections (2024) -->
         <li itemscope itemtype="https://schema.org/ScholarlyArticle">
-        <p class="cite">
+          <p class="cite">
             <span class="authors" itemprop="author">Zimmermann, Y.,</span>
             <span class="authors" itemprop="author">Bazgir, A.,</span>
             <span> …, </span>
@@ -631,74 +569,71 @@
             <span class="year"> (2024).</span>
             <span class="title" itemprop="name"> Reflections from the 2024 large language model (LLM) hackathon for applications in materials science and chemistry.</span>
             <span class="journal" itemprop="isPartOf"> <em>arXiv</em> preprint (arXiv:2411.15221).</span>
-        </p>
-        <div class="actions">
+          </p>
+          <div class="actions">
             <a class="chip" href="https://arxiv.org/abs/2411.15221" target="_blank" rel="noopener">Open access</a>
             <button class="chip" type="button" data-copy="#apa6">Copy APA</button>
-        </div>
-        <p id="apa6" class="sr-only">
-        Zimmermann, Y., Bazgir, A., …, Khan, S. T., … & Blaiszik, B. (2024). Reflections from the 2024 large language model (LLM) hackathon for applications in materials science and chemistry. *arXiv* preprint (arXiv:2411.15221). https://arxiv.org/abs/2411.15221
-        </p>
+          </div>
+          <p id="apa6" class="sr-only">
+            Zimmermann, Y., Bazgir, A., …, Khan, S. T., … & Blaiszik, B. (2024). Reflections from the 2024 large language model (LLM) hackathon for applications in materials science and chemistry. *arXiv* preprint (arXiv:2411.15221). https://arxiv.org/abs/2411.15221
+          </p>
         </li>
-
-
       </ol>
     </section>
 
     <section id="awards">
-    <div class="section-head">
+      <div class="section-head">
         <h3>🏆 Awards</h3>
         <p>Selected scholarships, awards and honours.</p>
-    </div>
+      </div>
 
-    <ul class="awards" aria-label="Awards list">
+      <ul class="awards" aria-label="Awards list">
         <li class="award">
-        <h4 class="title">Queen Elizabeth II Graduate Scholarship in Science &amp; Technology</h4>
-        <p class="desc">The Queen Elizabeth II Graduate Scholarship in Science and Technology (QEII‐GSST) program is designed to encourage excellence in graduate studies in science and technology. The program is supported through funds provided by the Ministry of Colleges and Universities and funds raised by the University of Toronto from the private sector. Visit <a href="https://www.sgs.utoronto.ca/awards/queen-elizabeth-ii-graduate-scholarship-in-science-technology/">this</a> for more information.</p>
-        <div class="meta">
+          <h4 class="title">Queen Elizabeth II Graduate Scholarship in Science &amp; Technology</h4>
+          <p class="desc">The Queen Elizabeth II Graduate Scholarship in Science and Technology (QEII‐GSST) program is designed to encourage excellence in graduate studies in science and technology. The program is supported through funds provided by the Ministry of Colleges and Universities and funds raised by the University of Toronto from the private sector. Visit <a href="https://www.sgs.utoronto.ca/awards/queen-elizabeth-ii-graduate-scholarship-in-science-technology/">this</a> for more information.</p>
+          <div class="meta">
             <span class="pill"><strong>Amount:</strong>$15,000</span>
             <span class="pill"><strong>Period:</strong>Sept 2025 - Sept 2026</span>
-        </div>
+          </div>
         </li>
 
         <li class="award">
-        <h4 class="title">University of Toronto Fellowship</h4>
-        <p class="desc">Received upon admission into the Masters of Applied Science (MASc) program at the University of Toronto in Chemical Engineering and Applied Chemistry for academic and professional achievements.</p>
-        <div class="meta">
+          <h4 class="title">University of Toronto Fellowship</h4>
+          <p class="desc">Received upon admission into the Masters of Applied Science (MASc) program at the University of Toronto in Chemical Engineering and Applied Chemistry for academic and professional achievements.</p>
+          <div class="meta">
             <span class="pill"><strong>Amount:</strong>$13,200</span>
             <span class="pill"><strong>Period:</strong>Sept 2023 - Sept 2025</span>
-        </div>
+          </div>
         </li>
 
         <li class="award">
-        <h4 class="title">LLM Hackathon in Chemistry and Material Science</h4>
-        <p class="desc">Awarded 3rd place ($250 prize funded by Radical AI and Anthropic) in the LLM Hackathon for Applications in Materials and Chemistry for the development of PoreVoyant - a chemistry-informed AI agent that can generate new linkers to decrease the band gap in metal-organic frameworks while leveraging MOF literature. This work was featured in a <a href="https://medium.com/@blaiszik/llms-to-accelerate-discovery-in-materials-science-and-chemistry-refections-on-a-hackathon-b8364ca32242">Medium Article</a>.</p>
-        <div class="meta">
+          <h4 class="title">LLM Hackathon in Chemistry and Material Science</h4>
+          <p class="desc">Awarded 3rd place ($250 prize funded by Radical AI and Anthropic) in the LLM Hackathon for Applications in Materials and Chemistry for the development of PoreVoyant - a chemistry-informed AI agent that can generate new linkers to decrease the band gap in metal-organic frameworks while leveraging MOF literature. This work was featured in a <a href="https://medium.com/@blaiszik/llms-to-accelerate-discovery-in-materials-science-and-chemistry-refections-on-a-hackathon-b8364ca32242">Medium Article</a>.</p>
+          <div class="meta">
             <span class="pill"><strong>Amount:</strong>$250</span>
             <span class="pill"><strong>Period:</strong>May 2024</span>
-        </div>
+          </div>
         </li>
 
         <li class="award">
-        <h4 class="title">Bayesian Optimization in Chemistry and Material Science Hackathon</h4>
-        <p class="desc">Awarded <a href="https://ac-bo-hackathon.github.io/">2nd place</a> ($500 CAD prize funded by Acceleration Consortium) in the Bayesian Optimization for Chemistry and Materials Hackathon hosted by Acceleration Consortium at the University of Toronto. The project involved the application of Bayesian Optimization to accelerate the discovery of fluids with the highest heat transfer coefficients. The repository can be found <a href="https://github.com/sartaajkhan/BOMS-ProBs">here</a>.</p>
-        <div class="meta">
+          <h4 class="title">Bayesian Optimization in Chemistry and Material Science Hackathon</h4>
+          <p class="desc">Awarded <a href="https://ac-bo-hackathon.github.io/">2nd place</a> ($500 CAD prize funded by Acceleration Consortium) in the Bayesian Optimization for Chemistry and Materials Hackathon hosted by Acceleration Consortium at the University of Toronto. The project involved the application of Bayesian Optimization to accelerate the discovery of fluids with the highest heat transfer coefficients. The repository can be found <a href="https://github.com/sartaajkhan/BOMS-ProBs">here</a>.</p>
+          <div class="meta">
             <span class="pill"><strong>Amount:</strong>$500</span>
             <span class="pill"><strong>Period:</strong>March 2024</span>
-        </div>
+          </div>
         </li>
 
         <li class="award">
-        <h4 class="title">NSERC USRA</h4>
-        <p class="desc">Award of $6000 CAD issued for completion of 16 weeks of research work for the summer 2020 term and high academic achievements.</p>
-        <div class="meta">
+          <h4 class="title">NSERC USRA</h4>
+          <p class="desc">Award of $6000 CAD issued for completion of 16 weeks of research work for the summer 2020 term and high academic achievements.</p>
+          <div class="meta">
             <span class="pill"><strong>Amount:</strong>$6,000</span>
             <span class="pill"><strong>Period:</strong>May 2020 - Sept 2020</span>
-        </div>
+          </div>
         </li>
-    </ul>
+      </ul>
     </section>
-
 
     <!-- ===== Software ===== -->
     <section id="projects">
@@ -742,43 +677,39 @@
       </div>
     </section>
 
-    <!-- ===== Contact ===== -->
+    <!-- ===== Teaching ===== -->
     <section id="teaching">
-    <div class="section-head">
+      <div class="section-head">
         <h3>🎓 Teaching</h3>
         <p>Courses and instructional roles.</p>
-    </div>
+      </div>
 
-    <ul class="teaching" aria-label="Teaching roles">
+      <ul class="teaching" aria-label="Teaching roles">
         <li class="teach-card">
-        <h4 class="title">DEL-Bootcamp for Drug Discovery</h4>
-        <!-- <p class="desc">[Brief description — e.g., co-designed and delivered modules on ML for DEL datasets, assay design, and hit triaging.]</p> -->
-        <div class="meta">
+          <h4 class="title">DEL-Bootcamp for Drug Discovery</h4>
+          <div class="meta">
             <span class="pill"><strong>Period:</strong>Feb 2024 - Present</span>
             <span class="pill"><strong>Role:</strong>ML Tutor</span>
-        </div>
+          </div>
         </li>
 
         <li class="teach-card">
-        <h4 class="title">CHE260: Thermodynamics and Heat Transfer</h4>
-        <!-- <p class="desc">[Brief description — e.g., led tutorials, created problem sets, and held office hours covering energy balances, cycles, and convective heat transfer.]</p> -->
-        <div class="meta">
+          <h4 class="title">CHE260: Thermodynamics and Heat Transfer</h4>
+          <div class="meta">
             <span class="pill"><strong>Period:</strong>Sept 2025 - Present</span>
             <span class="pill"><strong>Role:</strong>Teaching Assistant (TA)</span>
-        </div>
+          </div>
         </li>
 
         <li class="teach-card">
-        <h4 class="title">CHE333: Chemical Reaction Engineering</h4>
-        <!-- <p class="desc">[Brief description — e.g., guided reactor design labs, kinetics derivations, and numerical modeling in Python.]</p> -->
-        <div class="meta">
+          <h4 class="title">CHE333: Chemical Reaction Engineering</h4>
+          <div class="meta">
             <span class="pill"><strong>Period:</strong>Jan 2026 - Present</span>
             <span class="pill"><strong>Role:</strong>Grader</span>
-        </div>
+          </div>
         </li>
-    </ul>
+      </ul>
     </section>
-
   </main>
 
   <!-- ===== Footer ===== -->
@@ -789,6 +720,19 @@
   </footer>
 
   <script>
+    // Mobile nav toggle + a11y
+    const links = document.querySelector('.nav-links');
+    const toggle = document.querySelector('.nav-toggle');
+
+    function setOpen(open){
+      links.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('menu-open', open);
+    }
+    toggle.addEventListener('click', ()=> setOpen(!links.classList.contains('open')));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=> setOpen(false)));
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') setOpen(false); });
+
     // Year + Copy APA helpers
     document.getElementById('year').textContent = new Date().getFullYear();
     document.querySelectorAll('[data-copy]').forEach(btn=>{
@@ -804,4 +748,3 @@
   </script>
 </body>
 </html>
-
